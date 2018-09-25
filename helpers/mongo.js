@@ -3,7 +3,7 @@ const utilities = require('./utilities.js');
 const secret = require('../settings/secret.js');
 const mongodb = secret.mongodb;
 
-mongoose.connect('mongodb://akmur:bE6afsdRHGK5Dzb@ds163162.mlab.com:63162/crux');
+mongoose.connect(mongodb);
 const dataSchema = new mongoose.Schema({
   date: String,
   type: String,
@@ -14,7 +14,7 @@ const dataSchema = new mongoose.Schema({
 const Value = mongoose.model('DataSet', dataSchema);
 
 module.exports.saveToDB = (valuesHomeToBeSaved, valuesCategoryToBeSaved, valuesProductToBeSaved, type) => {
-  mongoose.connect('mongodb://akmur:bE6afsdRHGK5Dzb@ds163162.mlab.com:63162/crux');
+  mongoose.connect(mongodb);
 
   const db = mongoose.connection;
 
@@ -79,7 +79,7 @@ module.exports.createMongoData = (value, type) => {
 }
 
 module.exports.getAll = () => {
-  mongoose.connect('mongodb://akmur:bE6afsdRHGK5Dzb@ds163162.mlab.com:63162/crux');
+  mongoose.connect(mongodb);
   const db = mongoose.connection;
   const promise = Value.find({}, function(err, datasets) {
       if (!err){
@@ -91,7 +91,7 @@ module.exports.getAll = () => {
 }
 
 module.exports.getOne = id => {
-  mongoose.connect('mongodb://akmur:bE6afsdRHGK5Dzb@ds163162.mlab.com:63162/crux');
+  mongoose.connect(mongodb);
   const db = mongoose.connection;
   const promise = Value.findById(id, function(err, dataset) {
       if (!err){
