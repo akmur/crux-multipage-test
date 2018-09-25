@@ -1,0 +1,49 @@
+:root {
+  --label-bg-color: #606c76;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.section {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.button-tab {
+  background: var(--label-bg-color);
+  border-color: var(--label-bg-color);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-right: 4px;
+}
+
+.button-tab:hover {
+  opacity: 0.5;
+}
+
+.tab {
+  visibility: hidden;
+  position: fixed;
+  left: -9999999999px;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+#toggle-tab-home:checked~#tab-home, #toggle-tab-category:checked~#tab-category, #toggle-tab-product:checked~#tab-product {
+  visibility: visible;
+  position: static;
+  left: 0;
+  opacity: 1;
+}
+
+.table--overall {
+  width: 33%;
+}

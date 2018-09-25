@@ -1,0 +1,60 @@
+extends layout
+
+include includes/mixins.pug
+
+block content
+  .container
+    h1.title= title
+
+    input#toggle-tab-home(checked='', type='radio', name='tab')
+    input#toggle-tab-category(type='radio', name='tab')
+    input#toggle-tab-product(type='radio', name='tab')
+
+    label(for='toggle-tab-home', class="button button-tab") Home
+    label(for='toggle-tab-category', class="button button-tab") Category
+    label(for='toggle-tab-product', class="button button-tab") Product
+
+    #tab-home.section.tab
+      h2
+        strong Home
+
+      h3 Overall Scores
+      +overallScore(valuesHome)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      // pass 'fcp' if you want the first content paint, else pass dcl (dom content loaded)
+      +table(valuesHome, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(valuesHome, 'dcl')
+
+    #tab-category.section.tab
+      h2
+        strong Category
+
+      h3 Overall Scores
+      +overallScore(valuesCategory)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      +table(valuesCategory, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(valuesCategory, 'dcl')
+
+    #tab-product.section.tab
+      h2
+        strong Product
+
+      h3 Overall Scores
+      +overallScore(valuesProduct)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      +table(valuesProduct, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(valuesProduct, 'dcl')
+
+    p
+      span Learn more about
+      span &nbsp;
+      a(href="https://developers.google.com/web/tools/chrome-user-experience-report/") Chrome User Experience Report

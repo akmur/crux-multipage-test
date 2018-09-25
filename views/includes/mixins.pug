@@ -1,0 +1,64 @@
+mixin table(values, type)
+
+  if type === 'fcp'
+    p Fast: (0 to 984ms), Average: (984 to 2073ms), Slow: (over 2073ms)
+  else
+    p Fast: (0 to 1366ms), Average: (1366 to 2787ms), Slow: (over 2787ms)
+  
+
+  table.table
+    tbody
+      tr 
+        th Site
+        th Fast
+        th Medium 
+        th Slow
+      each value in values
+        - fastValFcp = parseFloat((value[1].loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1);
+        - avgValFcp = parseFloat((value[1].loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1);
+        - slowValFcp = parseFloat((value[1].loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1);
+        - fastValDcl = parseFloat((value[1].loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1);
+        - avgValDcl = parseFloat((value[1].loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1);
+        - slowValDcl = parseFloat((value[1].loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1);
+        tr
+          th= value[0]
+          td
+            if type === 'fcp'
+              span= fastValFcp
+            else
+              span= fastValDcl
+            span %
+          td
+            if type === 'fcp'
+              span= avgValFcp
+            else
+              span= avgValDcl
+            span %
+          td
+            if type === 'fcp'
+              span= slowValFcp
+            else
+              span= slowValDcl
+            span %
+
+mixin overallScore (values)
+  table.table.table--overall
+    tbody
+      each value in values
+        tr
+          th= value[0]
+          td= value[1].ruleGroups.SPEED.score
+
+mixin tableHistory(values)
+  table.table
+    tbody
+      tr 
+        th Date
+        th Type
+        th Actions
+        each value in values
+          tr
+            th= value.date
+            th= value.type
+            th
+              a(href=`/dataset/${value._id}`) Open

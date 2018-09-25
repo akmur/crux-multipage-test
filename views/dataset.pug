@@ -1,0 +1,62 @@
+extends layout
+
+include includes/mixins.pug
+
+block content
+  .container
+    h1.title
+      span=title
+      span &nbsp;-&nbsp;
+      span=dataset.date
+      span &nbsp;-&nbsp;
+      span=dataset.type
+
+
+    input#toggle-tab-home(checked='', type='radio', name='tab')
+    input#toggle-tab-category(type='radio', name='tab')
+    input#toggle-tab-product(type='radio', name='tab')
+
+    label(for='toggle-tab-home', class="button button-tab") Home
+    label(for='toggle-tab-category', class="button button-tab") Category
+    label(for='toggle-tab-product', class="button button-tab") Product
+
+    #tab-home.section.tab
+      h2
+        strong Home
+
+      h3 Overall Scores
+      +overallScore(dataset.valuesHome)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      // pass 'fcp' if you want the first content paint, else pass dcl (dom content loaded)
+      +table(dataset.valuesHome, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(dataset.valuesHome, 'dcl')
+
+    #tab-category.section.tab
+      h2
+        strong Category
+
+      h3 Overall Scores
+      +overallScore(dataset.valuesCategory)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      +table(dataset.valuesCategory, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(dataset.valuesCategory, 'dcl')
+
+
+    #tab-product.section.tab
+      h2
+        strong Product
+
+      h3 Overall Scores
+      +overallScore(dataset.valuesProduct)
+
+      h3 FCP - First Contentful Paint (Is it happening?)
+      +table(dataset.valuesProduct, 'fcp')
+
+      h3 DCL - DOM Content Loaded
+      +table(dataset.valuesProduct, 'dcl')
