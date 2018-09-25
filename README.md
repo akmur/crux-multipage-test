@@ -15,7 +15,10 @@ Compare web performance metrics of your website against competiton, using the sc
 - Run "npm install" in your terminal
 - Run "npm run start" to start the server
 - Visit in your browser http://localhost:3333/
+- Whenever you visit /desktop or /, data will be saved to mongodb (once per day)
 
 # To-do
 
+- Add pagination to history page
+- Make the save mechanism more elegant
 - Compare also the pageStats for every added website
