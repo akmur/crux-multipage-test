@@ -27,7 +27,7 @@ module.exports.saveToDB = (valuesHomeToBeSaved, valuesCategoryToBeSaved, valuesP
     // check if there is anything saved for this day and type already
     const isPresent = Value.find({date: utilities.getFullDate(), type: type}, function(err, datasets) {
       if (!err){ 
-          return datasets
+          return datasets;
           process.exit();
       } else {
         throw err;
@@ -35,7 +35,8 @@ module.exports.saveToDB = (valuesHomeToBeSaved, valuesCategoryToBeSaved, valuesP
     });
 
     isPresent.then(values => {
-      if (values) {
+      console.log(values)
+      if (values.length > 0) {
         console.log('data was already saved')
       } else {
         const thisData = new Value({ 
